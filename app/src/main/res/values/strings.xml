@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">记事本</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_addNote">新建</string>
+    <string name="toolbar_title">记事本</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+
+    <string name="notes_menu_meeting">会议</string>
+    <string name="notes_menu_memo">备忘</string>
+    <string name="notes_menu_anniversary">纪念日</string>
+    <string name="notes_menu_todolist">待办事项</string>
+    <string name="notes_menu_default">所有记事本</string>
+    <string name="action_orderItem">排序方式</string>
+    <string name="action_showItem">查看选项</string>
+    <string name="title_activity_edit_note">EditNoteActivity</string>
+
+    <string name="edit_note_type_add">新的记事本</string>
+    <string name="edit_note_type_edit">编辑记事本</string>
+    <string name="note_title_hint">输入标题</string>
+    <string name="note_content_hint">这里添加记事本内容</string>
+
+    <string name="note_content">记事本内容</string>
+    <string name="note_shortcut_title">快捷方式</string>
+    <string name="note_type_hint">查看记事本</string>
+    <string name="note_tag_hint">查看标签</string>
+
+    <string name="note_type_dialogTitle">选择记事本</string>
+    <string name="note_tag_dialogTitle">选择标签</string>
+    <string name="add_note_tags_title">添加标签</string>
+    <string name="add_note_type_title">添加记事本</string>
+    <string name="create_time_line_default">创建于：</string>
+    <string name="editor_time_line_default">最新编辑：</string>
+    <string name="done">Done</string>
+    <string name="note_type_spinner_prompt">选择记事本：</string>
+    <string name="action_cleanNoteItem">全部删除</string>
+    <string name="first_init_app_key">first_init_app_key</string>
+    <string name="edit">编辑</string>
+    <string name="deleteNote">删除</string>
+    <string name="forwardNote">转发</string>
+    <string name="exit_app">退出</string>
+    <string name="title_activity_edit_note_type">EditNoteTypeActivity</string>
+    <string name="edit_note_type_title">编辑记事本</string>
+
+    <string name="today" formatted="false">今天\u0020%s</string>
+    <string name="before_day" formatted="false">%d\u0020天前</string>
+    <string name="before_month" formatted="false">%d\u0020个月前</string>
+    <string name="before_year" formatted="false">%d\u0020年前</string>
+    <string name="select_show_note_list_item">选择列表查看项</string>
+    <string name="note_list_noteType_item">笔记类型</string>
+    <string name="note_list_createTime_item">创建时间</string>
+    <string name="note_list_lastEditorTime_item">最后编辑时间</string>
+    <string name="not_save_note_leave_tip">记事本已经发生变化，是否保存后再离开</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="delete_note_hint">删除后无法恢复，你确定要删除该记事本吗？</string>
+    <string name="delete_allnote_hint">删除后无法恢复，你确定要删除所有记事本吗？</string>
+    <string name="delete_note_success">删除记事本成功</string>
+    <string name="select_order_type_note_list">选择列表排序方式</string>
+    <string name="order_title_item">按标题名称排序</string>
+    <string name="order_createTime_item">按创建时间排序</string>
+    <string name="order_laseEdit_item">按最新编辑时间排序</string>
+    <string name="double_back_exit_hint">再按一次返回键退出应用</string>
+
+</resources>

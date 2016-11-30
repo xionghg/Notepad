@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="default_notetype_list">
+        <item>"会议"</item>
+        <item>"备忘"</item>
+        <item>"纪念日"</item>
+        <item>"待办事项"</item>
+        <item>"所有记事本"</item>
+    </string-array>
+
+    <!--<string-array name="default_notetype_list1">-->
+        <!--<item>"默认笔记"</item>-->
+        <!--<item>"生活笔记"</item>-->
+        <!--<item>"工作笔记"</item>-->
+        <!--<item>"学习笔记"</item>-->
+    <!--</string-array>-->
+
+</resources>
