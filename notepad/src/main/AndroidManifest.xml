@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Edit Note Activity -->
         <activity
             android:name=".ui.EditNoteActivity"
             android:label="@string/title_activity_edit_note">
