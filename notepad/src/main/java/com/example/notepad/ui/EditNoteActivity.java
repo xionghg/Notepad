@@ -1,6 +1,7 @@
 package com.example.notepad.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -60,12 +61,12 @@ public class EditNoteActivity extends ToolbarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Bundle bundle = getIntent().getExtras();
-        currentNoteTypeId = bundle.getInt(NoteListFragment.NOTE_INIT_TYPE, 0);
-        if(currentNoteTypeId == 4){
-            currentNoteTypeId =0;
+        Intent intent = getIntent();
+        currentNoteTypeId = intent.getIntExtra(NoteListFragment.NOTE_INIT_TYPE, 0);
+        if (currentNoteTypeId == 4) {
+            currentNoteTypeId = 0;
         }
-        editNoteID = bundle.getInt(NoteListFragment.EDIT_NOTE_ID, -1);
+        editNoteID = intent.getIntExtra(NoteListFragment.EDIT_NOTE_ID, -1);
         if (editNoteID == -1) {
             currentNote = null;
         } else {
@@ -83,7 +84,7 @@ public class EditNoteActivity extends ToolbarActivity {
             noteTypeArray[i] = noteTypes.get(i).getNoteTypeString();
         }
 
-        noteTypeSpinner.setAdapter(new ArrayAdapter<String>(this, R.layout.simple_spinner_item, noteTypeArray));
+        noteTypeSpinner.setAdapter(new ArrayAdapter<>(this, R.layout.simple_spinner_item, noteTypeArray));
         noteTypeSpinner.setSelection(currentNoteTypeId);
         noteTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -249,6 +250,8 @@ public class EditNoteActivity extends ToolbarActivity {
         } else {
             EventBus.getDefault().post(NoteUtils.NOTE_UPDATE_EVENT);
         }
+
+        NotepadWidget.actionToNotepadWidget(this);
         finish();
     }
 

@@ -21,8 +21,17 @@
         <!-- Edit Note Activity -->
         <activity
             android:name=".ui.EditNoteActivity"
-            android:label="@string/title_activity_edit_note">
-        </activity>
+            android:label="@string/title_activity_edit_note" />
+
+        <receiver android:name=".ui.NotepadWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/notepad_widget_info" />
+        </receiver>
 
     </application>
 

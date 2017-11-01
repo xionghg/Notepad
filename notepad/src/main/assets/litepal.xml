@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <litepal>
-    <dbname value="EverNote"></dbname>
-    <version value="8"></version>
-
+    <dbname value="EverNote" />
+    <version value="8" />
 
     <list>
         <mapping class="com.example.notepad.bean.Note" />

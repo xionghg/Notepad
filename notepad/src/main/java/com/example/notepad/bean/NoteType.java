@@ -10,6 +10,11 @@ import java.util.List;
  */
 
 public class NoteType extends DataSupport {
+    public static final int NOTE_TYPE_MEETING     = 0;
+    public static final int NOTE_TYPE_MEMO        = 1;
+    public static final int NOTE_TYPE_ANNIVERSARY = 2;
+    public static final int NOTE_TYPE_TODOLIST    = 3;
+    public static final int NOTE_TYPE_ALL         = 4;
 
     private int noteTypeId;
 

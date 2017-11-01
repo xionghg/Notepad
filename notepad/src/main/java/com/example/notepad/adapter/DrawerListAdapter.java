@@ -18,23 +18,23 @@ import java.util.List;
 
 public class DrawerListAdapter extends BaseAdapter {
 
-    private Context context;
+    private Context mContext;
 
-    private List<NoteType> noteTypes;
+    private List<NoteType> mNoteTypes;
 
     public DrawerListAdapter(Context context, List<NoteType> noteTypes) {
-        this.context = context;
-        this.noteTypes = noteTypes;
+        this.mContext = context;
+        this.mNoteTypes = noteTypes;
     }
 
     @Override
     public int getCount() {
-        return noteTypes.size();
+        return mNoteTypes.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return noteTypes.get(position);
+        return mNoteTypes.get(position);
     }
 
     @Override
@@ -46,20 +46,20 @@ public class DrawerListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.drawer_list_item_layout, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.drawer_list_item_layout, parent, false);
             holder = new Holder();
             holder.textView = (TextView) convertView.findViewById(R.id.textView);
             convertView.setTag(holder);
         } else {
             holder = (Holder) convertView.getTag();
         }
-        holder.textView.setText(noteTypes.get(position).getNoteTypeString());
+        holder.textView.setText(mNoteTypes.get(position).getNoteTypeString());
         return convertView;
     }
 
     public void refreshDrawerList(List<NoteType> newDataTypes) {
-        noteTypes.clear();
-        noteTypes.addAll(newDataTypes);
+        mNoteTypes.clear();
+        mNoteTypes.addAll(newDataTypes);
         notifyDataSetChanged();
     }
 

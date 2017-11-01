@@ -8,16 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.transition.Explode;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.example.notepad.R;
 import com.example.notepad.adapter.NoteListAdapter;
@@ -29,8 +23,6 @@ import org.litepal.crud.DataSupport;
 
 import java.util.Collections;
 import java.util.List;
-
-import static com.example.notepad.R.string.delete_note_success;
 
 /**
  * Created by daxiong on 2016/10/27.
@@ -64,6 +56,16 @@ public class NoteListFragment extends Fragment implements View.OnClickListener, 
 
     private LinearLayoutManager linearLayoutManager;
 
+    public static NoteListFragment newInstance(int noteTypeId, boolean isCardLayout) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(NOTE_INIT_TYPE, noteTypeId);
+        //20161031 17.01 删除
+        //bundle.putBoolean(NOTE_LAYOUT_TYPE, isCardLayout);
+        NoteListFragment noteListFragment = new NoteListFragment();
+        noteListFragment.setArguments(bundle);
+        return noteListFragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,24 +74,23 @@ public class NoteListFragment extends Fragment implements View.OnClickListener, 
         currentNoteType = (DataSupport.where("notetypeid = ?",
                 String.valueOf(currentNoteTypeId)).find(NoteType.class, true)).get(0);
         currentNoteTypes = DataSupport.order("notetypeid").find(NoteType.class);
-        if(currentNoteTypeId == 4){
+        if (currentNoteTypeId == 4) {
             noteList = DataSupport.findAll(Note.class);
-            List<NoteType> tempNoteTypeList = DataSupport.order("notetypeid").find(NoteType.class);;
+            List<NoteType> tempNoteTypeList = DataSupport.order("notetypeid").find(NoteType.class);
             NoteType tempNoteType = null;
-            try{
+            try {
                 tempNoteType = tempNoteTypeList.get(0);
                 Log.e("1 Get type", tempNoteType.getNoteTypeString());
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
-        }else{
+        } else {
             noteList = currentNoteType.getNoteList();
         }
 
         reverseNoteList(noteList);
 
-        noteListAdapter = new NoteListAdapter(getActivity(), noteList, currentNoteType.getNoteTypeString());
+        noteListAdapter = new NoteListAdapter(getActivity(), noteList);
         noteListAdapter.setCurrentNoteTypeId(currentNoteTypeId);
     }
 
@@ -100,8 +101,7 @@ public class NoteListFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.note_list_all, container, false);
-        return view;
+        return inflater.inflate(R.layout.note_list_all, container, false);
     }
 
     @Override
@@ -141,33 +141,21 @@ public class NoteListFragment extends Fragment implements View.OnClickListener, 
         refreshLayout.setOnRefreshListener(this);
     }
 
-    public static NoteListFragment newInstance(int noteTypeId, boolean isCardLayout) {
-        Bundle bundle = new Bundle();
-        bundle.putInt(NOTE_INIT_TYPE, noteTypeId);
-        //20161031 17.01 删除
-        //bundle.putBoolean(NOTE_LAYOUT_TYPE, isCardLayout);
-        NoteListFragment noteListFragment = new NoteListFragment();
-        noteListFragment.setArguments(bundle);
-        return noteListFragment;
-    }
-
     @Override
     public void onClick(View v) {
         editNote();
     }
 
-    public void editNote(){
+    public void editNote() {
         Intent intent = new Intent(getActivity(), EditNoteActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt(NOTE_INIT_TYPE, currentNoteTypeId);
-        bundle.putInt(EDIT_NOTE_ID, -1);
-        intent.putExtras(bundle);
+        intent.putExtra(NOTE_INIT_TYPE, currentNoteTypeId);
+        intent.putExtra(EDIT_NOTE_ID, -1);
         startActivity(intent);
     }
 
     public void reloadNoteListAsSelectNoteType(int selectNoteTypeId) {
         currentNoteTypeId = selectNoteTypeId;
-        if(selectNoteTypeId == 4){
+        if (selectNoteTypeId == 4) {
             NoteType selectNoteType = (DataSupport.where("notetypeid = ?",
                     String.valueOf(selectNoteTypeId)).find(NoteType.class, true)).get(0);
             List<Note> selectNoteList = DataSupport.findAll(Note.class);
@@ -177,17 +165,15 @@ public class NoteListFragment extends Fragment implements View.OnClickListener, 
 //            List<Note> selectNoteList = selectNoteType.getNoteList();
 
             noteListAdapter.setCurrentNoteTypeId(selectNoteTypeId);
-            noteListAdapter.setCurrentNoteTypeString(selectNoteType.getNoteTypeString());
             reverseNoteList(selectNoteList);
-            noteListAdapter.setNoteList(selectNoteList);
-        }else {
+            noteListAdapter.setNotes(selectNoteList);
+        } else {
             NoteType selectNoteType = (DataSupport.where("notetypeid = ?",
                     String.valueOf(selectNoteTypeId)).find(NoteType.class, true)).get(0);
             List<Note> selectNoteList = selectNoteType.getNoteList();
             noteListAdapter.setCurrentNoteTypeId(selectNoteTypeId);
-            noteListAdapter.setCurrentNoteTypeString(selectNoteType.getNoteTypeString());
             reverseNoteList(selectNoteList);
-            noteListAdapter.setNoteList(selectNoteList);
+            noteListAdapter.setNotes(selectNoteList);
         }
     }
 
@@ -217,14 +203,6 @@ public class NoteListFragment extends Fragment implements View.OnClickListener, 
 
     public void setOrderNoteListType(int orderListIndicator) {
         noteListAdapter.orderNoteList(orderListIndicator);
-    }
-
-    public void hideFloatActionBut() {
-        floatingActionButton.setVisibility(View.GONE);
-    }
-
-    public void showFloatActionBut() {
-        floatingActionButton.setVisibility(View.VISIBLE);
     }
 
     @Override

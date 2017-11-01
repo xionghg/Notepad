@@ -62,5 +62,9 @@
     <string name="order_createTime_item">按创建时间排序</string>
     <string name="order_laseEdit_item">按最新编辑时间排序</string>
     <string name="double_back_exit_hint">再按一次返回键退出应用</string>
+    <string name="appwidget_text">记事本数目</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="zero">0</string>
 
 </resources>
