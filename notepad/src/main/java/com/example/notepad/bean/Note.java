@@ -34,11 +34,11 @@ public class Note extends DataSupport {
         this.noteId = noteId;
     }
 
-    public int getTypeId(){
+    public int getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(int typeId){
+    public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
 
